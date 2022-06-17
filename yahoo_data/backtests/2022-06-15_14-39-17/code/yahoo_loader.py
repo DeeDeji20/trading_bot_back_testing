@@ -59,6 +59,8 @@ def get_yahoo_data(tickers: list, start_date, end_date):
         print(f'Folder {str(folder)} - Ok')
 
     # create a list to store all loaded tickers
-    loaded_tickers = [get_yahoo_ticker(ticker, folder, start_date, end_date) for ticker in tickers]
+    loaded_tickers = []
+    for ticker in tickers:
+        loaded_tickers.append(get_yahoo_ticker(ticker, folder, start_date, end_date))
 
     return [ticker for ticker in loaded_tickers if ticker is not None]

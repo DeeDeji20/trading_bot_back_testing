@@ -3,16 +3,16 @@ from pathlib import Path
 from datetime import datetime, timedelta
 
 class YahooData(PythonData):
-    
+    self.RequiresMapping = ""
     def GetSource(self, config, date, isLiveMode):
         # print(f'GetSource YAHOO for date {date}')
-
+    
         # The name of the asset is the symbol in lowercase .csv (ex. spy.csv)
         fname = f'{config.Symbol.Value.lower()}.csv'
 
         # The source folder depends on the directory initialized in lean-cli
         # https://www.quantconnect.com/docs/v2/lean-cli/tutorials/local-data/importing-custom-data
-        source = f"/quant_connect/data/yahoo/{fname}"
+        source = Path(Globals.DataFolder)/'yahoo'/fname
 
         # The subscription method is LocalFile in this case
         return SubscriptionDataSource(source.as_posix(), SubscriptionTransportMedium.LocalFile)
